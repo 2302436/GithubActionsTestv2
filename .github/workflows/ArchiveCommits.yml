@@ -8,8 +8,8 @@ on:
     - '**.cs'
     - '**.csproj'
 
-env:
-  DOTNET_VERSION: '8.0.121' # The .NET SDK version to use
+permissions:
+  contents: write
 
 defaults:
   run:
@@ -21,12 +21,17 @@ jobs:
 
     steps:
     - name: Grab Commits
+    # Logic Solution should be, multiple git lines, | for multiple commands, NEED TO SET USERNAME LIKE LOADING VISUAL STUDIO UP, Add before commiting to repoistry and finally push
       id: CommitingStuff
-      run: git log --oneline
+      run: |
+        git log --oneline  > archive.txt
+        git config --global user.name "ArchiveBot"
+        git config --global user.email "Archive@Bot.com"
+        git add
+        git commit
+        git push
     
     - uses: actions/checkout@v2
     - name: Please would this in theory write the commits
       uses: actions/setup-dotnet@v1
-      with:
-          file: 'archive.txt'
-          content: CommitingStuff
+
