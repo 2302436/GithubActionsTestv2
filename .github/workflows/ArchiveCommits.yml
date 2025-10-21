@@ -9,11 +9,11 @@ on:
     - '**.csproj'
 
 env:
-  DOTNET_VERSION: '9.0.305' # The .NET SDK version to use
+  DOTNET_VERSION: '8.0.121' # The .NET SDK version to use
 
 defaults:
   run:
-    working-directory: PrimeService
+    working-directory: ArchiveCommits
 
 jobs:
   build-and-test:
